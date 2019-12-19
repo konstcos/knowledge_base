@@ -1,0 +1,27 @@
+<a href='{% url 'knovledg:index' %}'> Главная </a> 
+
+<br>
+<br>
+
+<div>
+
+    {% for category in categories %}
+        <br>
+        <br>
+        {{ category }}
+
+        <div>
+            
+            {% for child in category.children.all %}
+                
+               - {{ child }}
+
+            {% endfor %}
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+

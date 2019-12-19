@@ -1,2 +1,5 @@
 db.sqlite3
 kb_venv
+__pycache__
+knovledg/__pycache__
+knovledg_base/__pycache__
