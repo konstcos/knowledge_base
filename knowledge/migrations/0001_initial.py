@@ -20,15 +20,15 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField()),
                 ('comment', models.TextField(blank=True)),
                 ('description', models.TextField(blank=True)),
-                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='knovledg.Category')),
+                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='knowledge.Category')),
             ],
         ),
         migrations.CreateModel(
-            name='Knovledg',
+            name='Knowledge',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('text', models.TextField()),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='knovledg.Category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='knowledge.Category')),
             ],
         ),
     ]

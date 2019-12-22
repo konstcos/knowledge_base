@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Category, Knovledg
+from .models import Category, Knowledge
 
 # Register your models here.
 admin.site.register(Category)
-admin.site.register(Knovledg)
+admin.site.register(Knowledge)
 

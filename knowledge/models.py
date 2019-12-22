@@ -15,7 +15,7 @@ class Category(models.Model):
         return self.name
 
 
-class Knovledg(models.Model):
+class Knowledge(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     short_desc = models.TextField()
     text = models.TextField()

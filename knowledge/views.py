@@ -6,5 +6,5 @@ from .models import Category
 def index(request):
     categories = Category.objects.filter(parent__isnull=True).all()
     context = {'categories': categories}
-    return render(request, 'knovledg/index.html', context)
+    return render(request, 'knowledge/index.html', context)
 

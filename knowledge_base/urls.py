@@ -1,4 +1,4 @@
-"""knovledg_base URL Configuration
+"""knowledge_base URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('knovledg.urls', namespace='knovledg')),
+    path('', include('knowledge.urls', namespace='knowledge')),
 ]

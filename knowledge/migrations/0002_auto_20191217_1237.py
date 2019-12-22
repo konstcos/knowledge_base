@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('knovledg', '0001_initial'),
+        ('knowledge', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='knovledg',
+            model_name='knowledge',
             name='short_desc',
             field=models.TextField(default='sdf'),
             preserve_default=False,
