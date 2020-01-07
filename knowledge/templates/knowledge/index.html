@@ -1,34 +1,41 @@
 {% extends 'knowledge/base.html' %}
 
 {% block content %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Home</li>
-  </ol>
-</nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Home</li>
+        </ol>
+    </nav>
 
-<br>
-<br>
+    <div class="container">
 
-<div>
+        {% for category in categories %}
+            <div class="row">
 
-    {% for category in categories %}
-        <br>
-        <br>
-        {{ category }}
+                <div class="col-md-2">
+                    {{ category }}
 
-        <div>
-            
-            {% for child in category.children.all %}
-                
-               - {{ child }}
+                    {% if category.children.all %}
+                        <ul>
+                            {% for child in category.children.all %}
 
-            {% endfor %}
+                                <li>
+                                    {{ child }}
+                                </li>
 
-        </div>
+                            {% endfor %}
 
-    {% endfor %}
+                        </ul>
 
-</div>
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+        {% endfor %}
+
+    </div>
 {% endblock content %}
 
