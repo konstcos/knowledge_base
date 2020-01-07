@@ -1,4 +1,11 @@
-<a href='{% url 'knowledge:index' %}'> Главная </a>
+{% extends 'knowledge/base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ol>
+</nav>
 
 <br>
 <br>
@@ -23,5 +30,5 @@
     {% endfor %}
 
 </div>
-
+{% endblock content %}
 
