@@ -1,4 +1,6 @@
 from django.db import models
+from taggit.managers import TaggableManager
+
 
 # Create your models here.
 class Category(models.Model):
@@ -17,6 +19,7 @@ class Category(models.Model):
 
 class Knowledge(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    tags = TaggableManager()
     short_desc = models.TextField()
     text = models.TextField()
     
