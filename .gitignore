@@ -5,3 +5,4 @@ knowledge/__pycache__
 knowledge_base/__pycache__
 .env
 static
+node_modules

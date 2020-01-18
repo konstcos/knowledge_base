@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'taggit',
     'knowledge',
     'bootstrap4',
+    'rest_framework',
+    'frontend',
 ]
 
 MIDDLEWARE = [
