@@ -1,4 +1,5 @@
 import React from 'react';
+import {Provider, connect} from 'react-redux';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -33,7 +34,12 @@ import {
 import Categories from "./Categories";
 import Category from "./Category";
 import PropTypes from "prop-types";
-
+import EditCategory from "./EditCategory";
+import Tags from "./Tags";
+import TextComponent, {TestFunc} from "./TestComponent";
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import configureStore from "../store/configureStore";
+import initialState from "../contstants/initialState";
 
 class ShowTheLocation extends React.Component {
     static propTypes = {
@@ -53,6 +59,7 @@ class ShowTheLocation extends React.Component {
 // terminology) to the router.
 const ShowTheLocationWithRouter = withRouter(ShowTheLocation);
 
+const store = configureStore(initialState);
 
 function Copyright() {
     return (
@@ -146,120 +153,162 @@ const useStyles = makeStyles(theme => ({
     fixedHeight: {
         height: 240,
     },
+    margin_bottom: {
+        marginBottom: 30,
+    },
+
 }));
 
 // export default function App() {
 const App = props => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
+    const [test_prop_value, setTestPropValue] = React.useState('тестовый текст из парентового компонента');
     const handleDrawerOpen = () => {
         setOpen(true);
     };
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    const setTestProp = () => {
+        if (test_prop_value === 'тестовый текст из парентового компонента') {
+            setTestPropValue('новое значение пропса в парентовом контроллере');
+        } else {
+            setTestPropValue('тестовый текст из парентового компонента');
+        }
+
+    };
+
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     return (
-        <Router>
+        <Provider store={store}>
+            <Router>
+                <div className={classes.root}>
+                    <CssBaseline/>
+                    <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+                        <Toolbar className={classes.toolbar}>
+                            <IconButton
+                                edge="start"
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={handleDrawerOpen}
+                                className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+                            >
+                                <MenuIcon/>
+                            </IconButton>
+                            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                                База Знаний
+                            </Typography>
+                            <IconButton color="inherit">
+                                <Badge badgeContent={4} color="secondary">
+                                    <NotificationsIcon/>
+                                </Badge>
+                            </IconButton>
+                        </Toolbar>
+                    </AppBar>
+                    <Drawer
+                        variant="permanent"
+                        classes={{
+                            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+                        }}
+                        open={open}
+                    >
+                        <div className={classes.toolbarIcon}>
+                            <IconButton onClick={handleDrawerClose}>
+                                <ChevronLeftIcon/>
+                            </IconButton>
+                        </div>
+                        <Divider/>
+                        {/*<List>{mainListItems}</List>*/}
+                        <List>
+                            <MainListItems/>
+                        </List>
+                        {/*<Divider/>*/}
+                        {/*<List>{secondaryListItems}</List>*/}
+                    </Drawer>
+                    <main className={classes.content}>
 
-            <div className={classes.root}>
+                        <div className={classes.appBarSpacer}/>
 
-                <CssBaseline/>
-                <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-                    <Toolbar className={classes.toolbar}>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={handleDrawerOpen}
-                            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            База Знаний
-                        </Typography>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon/>
-                            </Badge>
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    variant="permanent"
-                    classes={{
-                        paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                    }}
-                    open={open}
-                >
-                    <div className={classes.toolbarIcon}>
-                        <IconButton onClick={handleDrawerClose}>
-                            <ChevronLeftIcon/>
-                        </IconButton>
-                    </div>
-                    <Divider/>
-                    {/*<List>{mainListItems}</List>*/}
-                    <List>
-                        <MainListItems/>
-                    </List>
-                    {/*<Divider/>*/}
-                    {/*<List>{secondaryListItems}</List>*/}
-                </Drawer>
-                <main className={classes.content}>
-                    <div className={classes.appBarSpacer}/>
-                    <Container maxWidth="lg" className={classes.container}>
+                        <Container maxWidth="lg" className={classes.container}>
 
-                        {/*<Router>*/}
-                        <Switch>
-
-                            {/*<Route path="/react" component={Categories}/>*/}
-                            {/*<Route path="/react/category" component={Category}/>*/}
-
-                            <Route path="/react/category">
-                                <Category/>
-                            </Route>
-                            <Route path="/react">
-                                <Categories/>
-                            </Route>
-                        </Switch>
-
-                        {/*</Router>*/}
+                            <div className={classes.margin_bottom}>
+                                <Breadcrumbs aria-label="breadcrumb">
+                                    <RouterLink color="inherit" to="/react"
+                                                className={'MuiBreadcrumbs-li MuiLink-root MuiLink-underlineHover MuiTypography-colorInherit'}>
+                                        Главная
+                                    </RouterLink>
+                                    <RouterLink color="inherit" to="/react/category"
+                                                className={'MuiBreadcrumbs-li MuiLink-root MuiLink-underlineHover MuiTypography-colorInherit'}>
+                                        Core
+                                    </RouterLink>
+                                    <Typography color="textPrimary">Breadcrumb</Typography>
+                                </Breadcrumbs>
+                            </div>
 
 
-                        {/*<Grid container spacing={3}>*/}
-                        {/*    /!* Chart *!/*/}
-                        {/*    <Grid item xs={12} md={8} lg={9}>*/}
-                        {/*        <Paper className={fixedHeightPaper}>*/}
-                        {/*            /!*<Chart />*!/*/}
-                        {/*            один*/}
-                        {/*        </Paper>*/}
-                        {/*    </Grid>*/}
-                        {/*    /!* Recent Deposits *!/*/}
-                        {/*    <Grid item xs={12} md={4} lg={3}>*/}
-                        {/*        <Paper className={fixedHeightPaper}>*/}
-                        {/*            /!*<Deposits />*!/*/}
-                        {/*            один*/}
-                        {/*        </Paper>*/}
-                        {/*    </Grid>*/}
-                        {/*    /!* Recent Orders *!/*/}
-                        {/*    <Grid item xs={12}>*/}
-                        {/*        <Paper className={classes.paper}>*/}
-                        {/*            /!*<Orders />*!/*/}
-                        {/*            один*/}
-                        {/*        </Paper>*/}
-                        {/*    </Grid>*/}
-                        {/*</Grid>*/}
+                            <Switch>
 
-                        <Box pt={4}>
-                            <Copyright/>
-                        </Box>
-                    </Container>
-                </main>
-            </div>
-        </Router>
+                                <Route path="/react/category">
+                                    <Category/>
+                                </Route>
+                                <Route path="/react/edit/category">
+                                    <EditCategory/>
+                                </Route>
+                                <Route path="/react/tags">
+                                    <Tags/>
+                                </Route>
+                                <Route path="/react">
+                                    <Categories/>
+                                </Route>
+                            </Switch>
+
+
+                            {/*<Grid container spacing={3}>*/}
+                            {/*    /!* Chart *!/*/}
+                            {/*    <Grid item xs={12} md={8} lg={9}>*/}
+                            {/*        <Paper className={fixedHeightPaper}>*/}
+                            {/*            /!*<Chart />*!/*/}
+                            {/*            один*/}
+                            {/*        </Paper>*/}
+                            {/*    </Grid>*/}
+                            {/*    /!* Recent Deposits *!/*/}
+                            {/*    <Grid item xs={12} md={4} lg={3}>*/}
+                            {/*        <Paper className={fixedHeightPaper}>*/}
+                            {/*            /!*<Deposits />*!/*/}
+                            {/*            один*/}
+                            {/*        </Paper>*/}
+                            {/*    </Grid>*/}
+                            {/*    /!* Recent Orders *!/*/}
+                            {/*    <Grid item xs={12}>*/}
+                            {/*        <Paper className={classes.paper}>*/}
+                            {/*            /!*<Orders />*!/*/}
+                            {/*            один*/}
+                            {/*        </Paper>*/}
+                            {/*    </Grid>*/}
+                            {/*</Grid>*/}
+
+                            <Box pt={4}>
+                                <Copyright/>
+                            </Box>
+                        </Container>
+                    </main>
+                </div>
+            </Router>
+        </Provider>
     );
 };
 
+function mapStateToProps (state) {
+  return {
+      loading: state.loading
+  }
+}
+
+// export default connect(mapStateToProps)(App);
+const App = connect(mapStateToProps)(Router);
 export default App;
+
+// попробовать сделать эту запись:
+// https://stackoverflow.com/questions/41892553/could-not-find-store-in-either-the-context-or-props-of-connectapp

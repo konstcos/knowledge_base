@@ -18,7 +18,8 @@
 </body>
 
 <script>
-    {#let categoriesUrl = "{%  url 'frontend:categories' %}";#}
+    let categoriesUrl = "{%  url 'api_v1:categories' %}";
+    let csrftoken = "{{ csrf_token }}";
 </script>
 
 {% load static %}

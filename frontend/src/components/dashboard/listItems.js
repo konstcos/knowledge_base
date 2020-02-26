@@ -64,6 +64,15 @@ class MainListItems extends Component {
                     </ListItemIcon>
                     <ListItemText primary="Категория"/>
                 </ListItem>
+                <ListItem button component={RouterLink} to="/react/tags"
+                          selected={this.state.location === '/react/tags'}
+                          onClick={() => this.setLocation('/react/tags')}>
+
+                    <ListItemIcon>
+                        <CategoryIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="Тэги"/>
+                </ListItem>
                 <ListItem button component={Link} href="/">
                     <ListItemIcon>
                         <HomeWorkIcon/>

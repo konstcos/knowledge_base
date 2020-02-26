@@ -22,4 +22,6 @@ urlpatterns = [
     # path('react/', include('frontend.urls', namespace='frontend')),
     # re_path(r'^react/\w+', include('frontend.urls', namespace='frontend')),
     re_path(r'^react(?:.*)/?', include('frontend.urls', namespace='frontend')),
+    re_path(r'^vue(?:.*)/?', include('vue_frontend.urls', namespace='vue_frontend')),
+    path('api/v1/', include('api_v1.urls', namespace='api_v1'))
 ]

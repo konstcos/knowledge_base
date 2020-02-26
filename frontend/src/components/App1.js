@@ -1,13 +1,4 @@
-import React, {Component} from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link as RouteLink
-} from "react-router-dom";
-
+import React, {Component} from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -27,16 +18,24 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-
-
+// import {mainListItems, secondaryListItems} from './dashboard/listItems';
+import MainListItems from './dashboard/listItems';
+import {withRouter} from "react-router";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link as RouterLink
+} from "react-router-dom";
+// import Chart from './Chart';
+// import Deposits from './Deposits';
+// import Orders from './Orders';
 import Categories from "./Categories";
 import Category from "./Category";
-// import {makeStyles} from "@material-ui/core";
-import {mainListItems, secondaryListItems} from "./dashboard/listItems";
-// import Chart from "./dashboard/Chart";
-// import Deposits from "./dashboard/Deposits";
-// import Orders from "./dashboard/Orders";
-
+import PropTypes from "prop-types";
+import EditCategory from "./EditCategory";
+import Tags from "./Tags";
+import TextComponent, {TestFunc} from "./TestComponent";
 
 function Copyright() {
     return (
@@ -52,7 +51,6 @@ function Copyright() {
 }
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
@@ -132,6 +130,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const classes = useStyles();
 
 class App1 extends Component {
 
@@ -143,17 +142,16 @@ class App1 extends Component {
             open: true,
         };
 
-        this.classes = useStyles();
-        this.fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
 
         this.getDataFromServer = this.getDataFromServer.bind(this);
         this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
         this.handleDrawerClose = this.handleDrawerClose.bind(this);
     }
 
-    static propTypes = {
-        children: PropTypes.node
-    };
+    // static propTypes = {
+    //     children: PropTypes.node
+    // };
 
     handleDrawerOpen = () => {
         this.setState({
@@ -179,47 +177,7 @@ class App1 extends Component {
 
 
             <div>
-                <Router>
-                    <a href="/"> На главную </a> <br/>новый реакт запущен успешно!!!
-                    <br/><br/><br/>
-
-                    <ul>
-                        <li>
-                            <Link to="/react">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/react/category">Category</Link>
-                        </li>
-                    </ul>
-
-                    <br/><br/><br/>
-
-                    <div>
-                        {/*<Categories/>*/}
-                        {/*<Category/>*/}
-
-                        <Switch>
-                            <Route path="/react/category">
-                                <Category/>
-                            </Route>
-                            <Route path="/react">
-                                <Categories/>
-                            </Route>
-                        </Switch>
-
-                    </div>
-
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div onClick={this.getDataFromServer}>
-                        Кнопка
-                    </div>
-
-                    <div>
-                    </div>
-
-                </Router>
+                Запустился
             </div>
         )
     }
