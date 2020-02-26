@@ -44,9 +44,9 @@
                         <v-card-text>
 
 
-                            <div>категория: <b>{{ knowing.category.name }}</b></div>
-                            <div>{{ knowing.text }}</div>
+                            <div class="mb-3">категория: <b>{{ knowing.category.name }}</b></div>
 
+                            <vue-markdown :source="knowing.text.slice(0, 150)"></vue-markdown>
 
                             <div v-if="knowing.tags.length > 0" class="mt-4">
                                 <v-chip
@@ -101,8 +101,15 @@
 </template>
 
 <script>
+
+    import VueMarkdown from 'vue-markdown'
+
     export default {
         name: "KnowledgeList",
+        components: {
+            VueMarkdown
+        },
+
         data() {
             return {
                 loading: true,
