@@ -46,7 +46,8 @@
 
                             <div class="mb-3">категория: <b>{{ knowing.category.name }}</b></div>
 
-                            <vue-markdown :source="knowing.text.slice(0, 150)"></vue-markdown>
+                            <!--                            <vue-markdown :source="knowing.text.slice(0, 150)"></vue-markdown>-->
+                            <vue-markdown :source="knowing.text"></vue-markdown>
 
                             <div v-if="knowing.tags.length > 0" class="mt-4">
                                 <v-chip
@@ -189,6 +190,16 @@
             // 'category'
         ],
         mounted() {
+
+            let categoryId = Number(this.$route.query.category_id);
+            let categoryName = this.$route.query.category_name;
+            if (categoryId && categoryName) {
+                this.selectedCategory = categoryId;
+                this.selectedCategoryName = categoryName;
+            } else {
+                this.$router.push({query: {}});
+            }
+
             this.getKnowledgeList();
         }
     }
