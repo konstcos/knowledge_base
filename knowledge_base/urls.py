@@ -19,8 +19,5 @@ from django.urls import path, re_path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('vue_frontend.urls', namespace='vue_frontend')),
-
-    re_path(r'^react(?:.*)/?', include('frontend.urls', namespace='frontend')),
-    re_path(r'^vue(?:.*)/?', include('vue_frontend.urls', namespace='vue_frontend')),
     path('api/v1/', include('api_v1.urls', namespace='api_v1'))
 ]

@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'knowledge',
     'bootstrap4',
     'rest_framework',
-    'frontend',
     'vue_frontend',
     'api_v1',
     'webpack_loader',
