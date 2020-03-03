@@ -7,7 +7,7 @@
         >
             <v-list dense>
 
-                <v-list-item link href="/">
+                <v-list-item link href="#/">
                     <v-list-item-action>
                         <v-icon>mdi-home</v-icon>
                     </v-list-item-action>
@@ -16,22 +16,22 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item link href="#/">
-                    <v-list-item-action>
-                        <v-icon>mdi-view-dashboard</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Dashboard</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item link href="#/knowledge/editor">
-                    <v-list-item-action>
-                        <v-icon>mdi-settings</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Settings</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+<!--                <v-list-item link href="#/">-->
+<!--                    <v-list-item-action>-->
+<!--                        <v-icon>mdi-view-dashboard</v-icon>-->
+<!--                    </v-list-item-action>-->
+<!--                    <v-list-item-content>-->
+<!--                        <v-list-item-title>Dashboard</v-list-item-title>-->
+<!--                    </v-list-item-content>-->
+<!--                </v-list-item>-->
+<!--                <v-list-item link href="#/knowledge/editor">-->
+<!--                    <v-list-item-action>-->
+<!--                        <v-icon>mdi-settings</v-icon>-->
+<!--                    </v-list-item-action>-->
+<!--                    <v-list-item-content>-->
+<!--                        <v-list-item-title>Settings</v-list-item-title>-->
+<!--                    </v-list-item-content>-->
+<!--                </v-list-item>-->
             </v-list>
         </v-navigation-drawer>
 
@@ -59,7 +59,7 @@
                 clipped-right
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
-            <span class="title ml-3 mr-5">База знаний</span>
+            <a href="#/" class="title ml-3 mr-5">База знаний</a>
 
             <v-spacer/>
 

@@ -52,7 +52,9 @@
                             </v-col>
 
                             <v-col>
-                                <vue-markdown :source="knowledgeText"></vue-markdown>
+                                <div class="markdown_content">
+                                    <vue-markdown :source="knowledgeText"></vue-markdown>
+                                </div>
                             </v-col>
                         </v-row>
 
@@ -73,7 +75,13 @@
                             @click="saveKnowledgeDetail()"
                             color="primary"
                             text>
-                        Сохранить
+                        Сохранить и продолжить
+                    </v-btn>
+                    <v-btn
+                            @click="saveKnowledgeDetail('detail')"
+                            color="primary"
+                            text>
+                        Сохранить и перейти в подробности
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -193,7 +201,7 @@
 
             },
 
-            saveKnowledgeDetail() {
+            saveKnowledgeDetail(action = null) {
 
                 if (this.categoryId === 0) {
                     alert('не заданна категория');
@@ -236,6 +244,12 @@
                             this.snackbar.text = 'Успешно сохранено';
                             this.snackbar.color = 'success';
                             this.snackbar.state = true;
+
+                            if (action === 'detail') {
+                                // this.$router.go('/knowledge/' + this.knowledgeId + '/detail')
+                                this.$router.push({ path: `/knowledge/${this.knowledgeId}/detail` });
+                            }
+
                         } else {
                             this.snackbar.text = 'Ошибка при сохранении';
                             this.snackbar.color = 'error';

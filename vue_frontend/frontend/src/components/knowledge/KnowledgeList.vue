@@ -22,8 +22,21 @@
                                 class="headline"
                                 primary-title>
                             <v-row>
-                                <v-col cols="10">{{ knowing.short_desc }}</v-col>
-                                <v-col cols="2" class="text-right">
+                                <v-col cols="8">
+                                    <a :href="'#/knowledge/' + knowing.id + '/detail'">{{ knowing.short_desc }}</a>
+                                </v-col>
+                                <v-col cols="4" class="text-right">
+                                    <v-btn
+                                            @click="openKnowledgeDetailDialog(knowing.id, knowing.short_desc)"
+                                            small
+                                            outlined
+                                            fab
+                                            rounded
+                                            dark
+                                            class="ml-3">
+                                        <v-icon small>mdi-card-text-outline</v-icon>
+                                    </v-btn>
+
                                     <v-btn
                                             small
                                             outlined
@@ -34,7 +47,6 @@
                                             :href="'#/knowledge/' + knowing.id + '/editor'">
                                         <v-icon small>mdi-pencil</v-icon>
                                     </v-btn>
-
                                 </v-col>
                             </v-row>
 
@@ -47,7 +59,11 @@
                             <div class="mb-3">категория: <b>{{ knowing.category.name }}</b></div>
 
                             <!--                            <vue-markdown :source="knowing.text.slice(0, 150)"></vue-markdown>-->
-                            <vue-markdown :source="knowing.text"></vue-markdown>
+                            <div class="knowing_content">
+                                <div class="markdown_content">
+                                    <vue-markdown :source="knowing.text"></vue-markdown>
+                                </div>
+                            </div>
 
                             <div v-if="knowing.tags.length > 0" class="mt-4">
                                 <v-chip
@@ -97,18 +113,33 @@
             ></v-pagination>
         </div>
 
+
+        <v-dialog v-model="knowledgeDetailDialog" width="80%" scrollable>
+            <v-card>
+                <v-card-title class="headline"
+                              primary-title>
+                    {{ currentDetailName }}
+                </v-card-title>
+                <v-card-text>
+                    <knowledge-detail :knowledgeId="currentDetailId"></knowledge-detail>
+                </v-card-text>
+            </v-card>
+        </v-dialog>
+
     </div>
 
 </template>
 
 <script>
 
-    import VueMarkdown from 'vue-markdown'
+    import VueMarkdown from 'vue-markdown';
+    import KnowledgeDetail from "./KnowledgeDetail";
 
     export default {
         name: "KnowledgeList",
         components: {
-            VueMarkdown
+            VueMarkdown,
+            KnowledgeDetail
         },
 
         data() {
@@ -119,9 +150,13 @@
                 knowledge: [],
                 selectedCategory: 0,
                 selectedCategoryName: '',
+                knowledgeDetailDialog: false,
+                currentDetailId: 0,
+                currentDetailName: '',
             };
         },
         methods: {
+
             getKnowledgeList() {
 
                 this.loading = true;
@@ -160,6 +195,12 @@
                 this.$router.push({query: {}});
                 // this.selectedCategory = 0;
                 // this.selectedCategoryName = '';
+            },
+
+            openKnowledgeDetailDialog(knowingId, knowingName) {
+                this.currentDetailId = knowingId;
+                this.currentDetailName = knowingName;
+                this.knowledgeDetailDialog = true
             }
 
         },
@@ -213,4 +254,8 @@
         cursor: pointer;
     }
 
+    .knowing_content {
+        max-height: 150px;
+        overflow: hidden;
+    }
 </style>

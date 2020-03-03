@@ -1,5 +1,7 @@
 import KnowledgeList from "./components/knowledge/KnowledgeList";
 import KnowledgeEditor from "./components/knowledge/KnowledgeEditor";
+import KnowledgeDetail from "./components/knowledge/KnowledgeDetail";
+import KnowledgeDetailPage from "./pages/knowledge/KnowledgeDetailPage";
 
 const routes = [
     {
@@ -21,6 +23,37 @@ const routes = [
                 text: 'Spheres',
                 href: '',
                 disabled: false,
+
+            }],
+        }
+    },
+
+    {
+        path: '/knowledge/:id/detail',
+        name: 'knowledge.detail',
+        component: KnowledgeDetailPage,
+        meta: {
+            title: "detail of sphere",
+            breadcrumbs: [{
+
+                name: 'CONTACT',
+                text: 'CONTACT',
+                href: '/',
+                disabled: false,
+
+            },{
+
+                name: 'Spheres',
+                text: 'Spheres',
+                href: '#/',
+                disabled: false,
+
+            }, {
+
+                name: 'Detail',
+                text: 'Detail',
+                href: '',
+                disabled: true,
 
             }],
         }
@@ -55,7 +88,6 @@ const routes = [
 
             }],
         }
-
     }
 
 ];
