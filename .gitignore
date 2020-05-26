@@ -1,5 +1,7 @@
+.idea
 db.sqlite3
 kb_venv
+venv
 __pycache__
 knowledge/__pycache__
 knowledge_base/__pycache__
